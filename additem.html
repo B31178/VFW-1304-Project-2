@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<!--
+Travis Pochintesta
+VFW 1304
+Project 2
+additem.html
+-->
+
+<html>
+	<body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="description" content="Visual Frameworks Week 1 Assignment - Travis Pochintesta" />
+        <meta name="keywords" content="html5, Mobile Development, Full Sail University" />
+        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="no index, no follow" />
+        <meta name="viewport" content="user-scalable=no, width=device-width" />
+        <title>KiT</title>
+        <link href="css/style.css" type="text/css" rel="stylesheet"/>
+        <header>
+            <hgroup>
+            <h1 id="titleText">New Contact</h1>
+            </hgroup>
+        </header>
+    </head>
+	<form action="#" method="post">
+		<fieldset>
+			<legend>Information</legend>
+			<ul>
+				<li><label for="fname">First Name:</label><input type="text" id="fname" /></li>
+				<li><label for="lname">Last Name:</label><input type="text" id="lname" /></li>
+				<li><label for="phone">Phone:</label><input type="text" id="phone" /></li>
+				<li><label for="address">Address:</label><input type="text" id="address" /></li>
+				<li><label for="email">Email:</label><input type="email" id="email" placeholder="example@email.com" /></li>
+			</ul>
+		</fieldset>
+		<fieldset>
+			<legend>Questions</legend>
+			<ul>
+				<li>
+					<label for="title">Title:</label>
+					<select id="title">
+							<option value="Mr.">Mr.</option>
+							<option value="Ms.">Ms.</option>
+							<option value="Mrs.">Mrs.</option>
+							<option value="Dr.">Dr.</option>
+							<option value="Sir">Sir</option>
+					</select>		  				
+				</li>
+				<li>Gender?:
+					<ul>
+						<li><input type="radio" value="Male" id="male" name="gender" /><label for="male">Male</label><li>
+						<li><input type="radio" value="Female" id="female" name="gender" /><label for="female">Female</label><li>
+					</ul>
+				</li>
+				<li>How do you know this person?:
+					<ul>
+						<li><input type="checkbox" value="friend" id="catfriend" /><label for="friend">Friend</label></li>
+						<li><input type="checkbox" value="family" id="catfamily" /><label for="family">Family</label></li>
+						<li><input type="checkbox" value="school" id="catschool" /><label for="school">School</label></li>
+						<li><input type="checkbox" value="work" id="catwork" /><label for="work">Work</label></li>
+						<li><input type="checkbox" value="acquaintance" id="catacquaintance" /><label for="acquaintance">Acquaintance</label></li>	
+					</ul>
+				</li>
+				<li>
+					<label for="birthday">Birthday:</label>
+					<input type="date" id="birthday" />
+				</li>
+				<li>
+					<label for="bestyrating">Besty Rating:</label>
+					<input type="range" id="bestyrating" min="1" max="100"/>
+				</li>
+				<li><label for="notes">Notes:</label><textarea id="notes" placeholder="enter text here..."></textarea></li>
+			</ul>
+		</fieldset>
+		<input type="submit" value="Create Contact" />
+		<div>
+			<a href="#">Clear Stored Data</a> <a href="#">Display Data</a>
+		</div>
+	</form>
+	</body>
+<script src="js/main.js" type="text/javascript"></script>
+</html>
