@@ -69,7 +69,7 @@ alert(localStorage.value(0));
 		}
 	}
 	
-	//Collect Form Values	
+/* Collect Form Values */	
 	function saveData(){
 		var key				= Math.floor(Math.random()*10000000); /* What if the same # is randomly generated twice?  Should I buy a lotto ticket? */
 		whichRadio();
@@ -95,7 +95,7 @@ alert(localStorage.value(0));
 		alert("Critter Captured!");
 	}
 	
-	// Display Contact - I need to edit this to reference my HTML properly...
+/* Display Contact - I need to edit this to reference my HTML properly... */
 	function getContact(){
 		toggleControls("on"); // ?
 		if(localStorage.length === 0){
@@ -123,7 +123,7 @@ alert(localStorage.value(0));
 		}
 	}
 	
-	// Clear Local Storage
+/* Clear Local Storage */
 	function clearStorage(){
 		if(localStorage.length === 0){
 		alert("Nothing to clear.")
