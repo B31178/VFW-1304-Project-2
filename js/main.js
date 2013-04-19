@@ -69,6 +69,27 @@ alert(localStorage.value(0));
 		}
 	}
 	
+	function toggleDisplay(d){ // Need to change my var names...
+		switch(d){ // I've never seen this explained before in the materials.
+			case "on":
+				$("contactForm").style.display = "none"; // Need to use my own var and add it to my form id in the HTML.
+				$("clear").style.display = "inline";
+				$("displayContact").style.display = "none";
+				$("addNew.style").display = "inline";
+				break;
+			case "off":
+				$("contactForm").style.display = "block";
+				$("clear").style.display = "inline";
+				$("displayContact").style.display = "inline";
+				$("addNew.style").display = "none";
+				$("makeContact").dispaly = "none";
+				break;
+			default:
+				return false;
+		}
+	
+	}
+	
 /* Collect Form Values */	
 	function saveData(){
 		var key				= Math.floor(Math.random()*10000000); /* What if the same # is randomly generated twice?  Should I buy a lotto ticket? */
@@ -97,7 +118,7 @@ alert(localStorage.value(0));
 	
 /* Display Contact - I need to edit this to reference my HTML properly... */
 	function getContact(){
-		toggleControls("on"); // ?
+		toggleDisplay("on");
 		if(localStorage.length === 0){
 			alert("No critters captured yet.");
 		}
@@ -106,6 +127,7 @@ alert(localStorage.value(0));
 		var addProperties = document.createElement("ul");
 		makeContact.appendChild(addProperties);
 		document.body.appendChild(makeContact);
+		$(makeContact).style.display = "block";
 		for(var i=0; len=localStorage.length i<len; i++){
 			var addProps = document.createElement("li");
 			addProperties.appendChild(addProps);
@@ -136,6 +158,12 @@ alert(localStorage.value(0));
 	}
 	
 /* Save Data */
+	var displayContact = $("displayContact"); // id needs added to HTML?
+	displayContact.addEventListener("click", getContact);
+	
+	var clearContacts = $("clearContacts"); // id needs added to HTML?
+	clearContacts.addEventListener("click", clearStorage);
+	
 	var storeContact = $("submit");
 	storeContact.addEventListener("click", saveData);
 
