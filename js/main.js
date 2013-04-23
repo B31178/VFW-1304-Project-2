@@ -1,24 +1,33 @@
-/*
-Travis Pochintesta
-VFW 1304
-Project 2
-main.js
-*/
+// Travis Pochintesta
+// VFW 1304
+// Project 2
+// main.js
 
 /* Wait for DOM */
 window.addEventListener("DOMContentLoaded", function() {
 
-alert(localStorage.value(0)); 
-
 /* Create Variables */
+
 	var genderType = "Unknown";
-	var catType = [];
+	var radios = [$("male"), $("female")]
+	
+	var titleList = ["--Choose A Title--", "Mr.", "Ms.", "Mrs.", "Dr.", "Sir"];
+	
+	var friendCheck = "no";
+	var familyCheck = "no";
+	var schoolCheck = "no";
+	var workCheck = "no";
+	var acquaintanceCheck = "no";
+	
+	var storeContact = $("submit");
+	var displayContact = $("displayContact");
+	var clearContacts = $("clearContacts");
 
 /* Declare Functions */
 
 	// Get Element from HTML
 	function $(x){
-		var selectElement = getElementById(x);
+		var selectElement = document.getElementById(x);
 		return selectElement;
 	}
 	
@@ -32,139 +41,163 @@ alert(localStorage.value(0));
 		}
 	}
 	
-	// Get Checkbox Value - I need to make a loop for this.  Until then I need to push these values to the catType array.  Running out of time.
+	// Get Checkbox Value
 	function isFriend(){
 		if($("catFriend").checked){
-			catType = $("catFriend".value);
+			friendCheck = $("catFriend").value;
 		}else{
-			catType = "N/A"
+			friendCheck = "N/A"
 		}
 	}
 	function isFamily(){
 		if($("catFamily").checked){
-			catType = $("catFamily".value);
+			familyCheck = $("catFamily").value;
 		}else{
-			catType = "N/A"
+			familyCheck = "N/A"
 		}
 	}
 	function isSchool(){
 		if($("catSchool").checked){
-			catType = $("catSchool".value);
+			schoolCheck = $("catSchool").value;
 		}else{
-			catType = "N/A"
+			schoolCheck = "N/A"
 		}
 	}
 	function isWork(){
 		if($("catWork").checked){
-			catType = $("catWork".value);
+			workCheck = $("catWork").value;
 		}else{
-			catType = "N/A"
+			workCheck = "N/A"
 		}
 	}
-	function isAcquainance(){
+	function isAcquaintance(){
 		if($("catAcquaintance").checked){
-			catType = $("catAcquaintance".value);
+			acquaintanceCheck = $("catAcquaintance").value;
 		}else{
-			catType = "N/A"
+			acquaintanceCheck = "N/A"
 		}
 	}
 	
-	function toggleDisplay(d){ // Need to change my var names...
-		switch(d){ // I've never seen this explained before in the materials.
+	// Toggle Contact Input/Storage Display	
+	function toggleDisplay(t){
+		switch(t){
 			case "on":
-				$("contactForm").style.display = "none"; // Need to use my own var and add it to my form id in the HTML.
-				$("clear").style.display = "inline";
+				$("critterForm").style.display = "none";
+				$("clearContacts").style.display = "inline";
 				$("displayContact").style.display = "none";
-				$("addNew.style").display = "inline";
+				$("addNew").style.display = "inline";
 				break;
 			case "off":
-				$("contactForm").style.display = "block";
-				$("clear").style.display = "inline";
+				$("critterForm").style.display = "block";
+				$("clearContacts").style.display = "inline";
 				$("displayContact").style.display = "inline";
-				$("addNew.style").display = "none";
-				$("makeContact").dispaly = "none";
+				$("addNew").style.display = "none";
+				$("items").style.display = "none";
 				break;
 			default:
 				return false;
-		}
+		}	
+	} 
 	
+/* Create Titles */
+
+	function makeTitles(){
+		var targetForm = document.getElementsByTagName("form");
+		var selectLi = $("title");
+		var makeTitleList = document.createElement("select");
+			makeTitleList.setAttribute("id", "titles");
+		for(var i=0, j=titleList.length; i<j; i++){
+			var makeTitle = document.createElement("option");
+			var titleText = titleList[i];
+				makeTitle.setAttribute("value", titleText);
+				makeTitle.innerHTML = titleText;
+				makeTitleList.appendChild(makeTitle);
+		}
+		selectLi.appendChild(makeTitleList);
 	}
 	
-/* Collect Form Values */	
+	makeTitles();
+	
+/* Collect Form Values */
+
 	function saveData(){
-		var key				= Math.floor(Math.random()*10000000); /* What if the same # is randomly generated twice?  Should I buy a lotto ticket? */
+		var key				= Math.floor(Math.random()*10000001); /* What if the same # is randomly generated twice?  Should I buy a lotto ticket? */
 		whichRadio();
-		whichCats();
+		isFriend();
+		isFamily();
+		isSchool();
+		isWork();
+		isAcquaintance();
 		var contact					= {};
-			contact.fname			=["First Name:", $("fname").value];
-			contact.lname			=["Last Name:", $("lname").value];
-			contact.phone			=["Phone:", $("phone").value];
-			contact.address			=["Address:", $("address").value];
-			contact.email			=["Email:", $("email").value];			
-			contact.title			=["Title:", $("title").value];
-			contact.gender			=["Gender:", genderType];
-			contact.friend			=["Friend", catType];
-			contact.family			=["Family", catType];
-			contact.school			=["School", catType];
-			contact.work			=["Work", catType];
-			contact.acquaintance	=["Acquaintance", catType];
-			contact.birthday		=["Birthday:", $("birthday").value];
-			contact.besty			=["Besty Rating:", $("besty").value];
-			contact.notes			=["Notes:", $("notes").value];
+			contact.fname			= ["First Name:", $("fname").value];
+			contact.lname			= ["Last Name:", $("lname").value];
+			contact.phone			= ["Phone:", $("phone").value];
+			contact.address			= ["Address:", $("address").value];
+			contact.email			= ["Email:", $("email").value];			
+		 	contact.gender			= ["Gender:", genderType];
+			contact.title			= ["Title:", $("titles").value];
+			contact.friend			= ["Friend", friendCheck];
+			contact.family			= ["Family", familyCheck];
+			contact.school			= ["School", schoolCheck];
+			contact.work			= ["Work", workCheck];
+			contact.acquaintance	= ["Acquaintance", acquaintanceCheck];
+			contact.birthday		= ["Birthday:", $("birthday").value];
+			contact.bestyrating		= ["Besty Rating:", $("bestyrating").value];
+			contact.notes			= ["Notes:", $("notes").value];
 		
-		localStorage.setItem("key", JSON.stringify(contact));
+		localStorage.setItem(key, JSON.stringify(contact));
 		alert("Critter Captured!");
 	}
 	
-/* Display Contact - I need to edit this to reference my HTML properly... */
+/* Display Contact */
+	
 	function getContact(){
 		toggleDisplay("on");
 		if(localStorage.length === 0){
 			alert("No critters captured yet.");
 		}
-		var makeContact = document.createElement("div");
-		makeContact.setAttribute("key", "contact");
-		var addProperties = document.createElement("ul");
-		makeContact.appendChild(addProperties);
-		document.body.appendChild(makeContact);
-		$(makeContact).style.display = "block";
-		for(var i=0; len=localStorage.length i<len; i++){
-			var addProps = document.createElement("li");
-			addProperties.appendChild(addProps);
+		var makeContactList = document.createElement("div");
+		makeContactList.setAttribute("id", "items");
+		var makeContact = document.createElement("ul");
+		makeContactList.appendChild(makeContact);
+		document.body.appendChild(makeContactList);
+		$("items").style.display = "block";
+		for(var i=0, len=localStorage.length; i<len; i++){
+			var addContact = document.createElement("li");
+			makeContact.appendChild(addContact);
 			var key = localStorage.key(i);
-			var value = localStorage.getItem(key);
-			var obj = JSON.parse(value);
-			var addSubProperties = document.createElement("li");
-			addProps.appendChild(addSubProperties);
-			for(var n in obj){
-				var addSubProps = document.createElement("li");
-				addSubProperties.appendChild(addSubProps);
-				var optSubText = obj[n][0]+" "+obj[n][1]; // ?
-				addSubProps.innerHTML = optSubText;
+			var props = localStorage.getItem(key);
+			var contact = JSON.parse(props);
+			var addProperties = document.createElement("li");
+			addContact.appendChild(addProperties);
+			for(var a in contact){
+				var addSubProp = document.createElement("li");
+				addProperties.appendChild(addSubProp);
+				var optSubText = contact[a][0]+" "+contact[a][1]; // ?
+				addSubProp.innerHTML = optSubText;
 			}
 		}
 	}
 	
 /* Clear Local Storage */
+
 	function clearStorage(){
 		if(localStorage.length === 0){
 		alert("Nothing to clear.")
 	}else{
 		localStorage.clear();
-		alert("Contacts deleted.");
+		alert("Critters Released!");
 		window.location.reload();
 		return false; // ?
 		}
 	}
+
+/* Main Code */	
 	
-/* Save Data */
-	var displayContact = $("displayContact"); // id needs added to HTML?
+	storeContact.addEventListener("click", saveData);
+	
 	displayContact.addEventListener("click", getContact);
 	
-	var clearContacts = $("clearContacts"); // id needs added to HTML?
 	clearContacts.addEventListener("click", clearStorage);
-	
-	var storeContact = $("submit");
-	storeContact.addEventListener("click", saveData);
-
-}
+		
+});
